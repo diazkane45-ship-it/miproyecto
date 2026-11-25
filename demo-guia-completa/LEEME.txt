@@ -1,0 +1,72 @@
+Demo · Guía privada completa con «Explora la costa» (24/11/2026)
+
+QUÉ ES
+Una página (index.html) con HTML, CSS y JavaScript propios, más una copia del mapa de parkings
+(parkings-maresme.html). No usa PHP, base de datos ni archivos de bcr-web. Carga las tipografías
+de Google Fonts y la librería de mapas Leaflet desde una CDN; sin Internet, el mapa no aparece
+pero la lista y los botones siguen funcionando.
+
+CÓMO ABRIRLA
+  Opción 1 · Con XAMPP: copia esta carpeta a C:\xampp\htdocs\demo-guia-completa\
+             y abre http://localhost/demo-guia-completa/
+  Opción 2 · Doble clic en index.html. Funciona todo salvo el mapa de parkings incrustado
+             (algunos navegadores bloquean los iframes en archivos locales; usa «Ampliar»).
+  NO la copies dentro de C:\xampp\htdocs\bcr-web\: el .htaccess de la web cierra con 403
+  cualquier carpeta que no sea sitio/ o panel/, y así debe seguir.
+
+ESTRUCTURA (en el orden en que la usa el huésped)
+  Portada → accesos rápidos (5 pasos + «Farmacia y urgencias») → barra de apartados fija
+  1 Cómo llegar desde el aeropuerto (la demo de transporte, integrada)
+  2 Check-in (horas, llaves, registro de viajeros, llegada tarde, wifi)
+  3 Ruta exacta hasta la vivienda (mapa, navegación de un toque y «los últimos metros»)
+  4 Dónde aparcar (mapa de parkings, se carga al pulsar)
+  5 Explora la costa (mapa + fichas con nota de insider, filtros y exportación)
+  Contacto
+
+«EXPLORA LA COSTA»
+  - Filtros: Lo urgente (farmacia, urgencias, gasolinera 24 h, súper hasta tarde), Comer bien
+    sin trampas, Bares y terrazas tranquilos, Atardeceres sin gente, Cultura local, Rutas secretas,
+    Mercadillos, Centros comerciales y Tren.
+  - «Cerca de ti» (8 km del alojamiento) o «Toda la costa»; siempre ordenado por distancia.
+  - Cada ficha: Tipo / Horario / Consejo útil, y botones Google Maps · Apple Maps · Waze de un toque
+    (en iPhone, Apple Maps va primero). Llamar, Web, Copiar ficha y Ver en el mapa.
+  - Farmacias: la de guardia cambia cada día, así que la ficha enlaza a la web oficial del Colegio
+    de Farmacéuticos y nunca dice cuál está de guardia hoy.
+  - «Copiar ficha» y «Copiar todas las fichas» usan el formato de notas de insider (emoji + Tipo,
+    Horario, Consejo útil). «Descargar para Google My Maps (KML)» genera un archivo que se importa
+    en Google My Maps (Crear mapa → Importar) con las capas por categoría.
+
+QUÉ ES DE PRUEBA Y QUÉ ES REAL
+  - De prueba (marcado en la página): ubicación de la vivienda (centro del municipio), horas de
+    check-in, llaves, wifi y los «últimos metros».
+  - Reales: transporte (encargo del 26/10/2026) y los lugares de «Explora», investigados y
+    verificados el 24/11/2026 con fuentes oficiales (ayuntamientos, cadenas, Geoportal de
+    gasolineras, Rodalies, Colegios de Farmacéuticos…). La fuente sale en cada ficha.
+    Coordenadas de OpenStreetMap (© colaboradores de OpenStreetMap, ODbL).
+  - Revísalos antes de publicarlos: horarios y aperturas cambian, sobre todo fuera de temporada.
+
+LUGARES (138, comprobados el 24/11/2026)
+  Farmacia por pueblo 10 · Súper hasta tarde 15 · Gasolinera 24 h 13 · Mercadillos 12 · Bares,
+  terrazas y música 19 · Centros comerciales 4 · Lugares icónicos 18 · Comer bien 19 · Atardeceres 7
+  · Rutas 9 · Urgencias 5 · Tren 7.
+  - «Castillo de Tordera»: están los dos candidatos, el Castell de Valltordera (Tordera; castillo de
+    estilo medieval moderno, solo con cena-espectáculo) y el Castell de Palafolls (medieval, solo
+    con visita guiada reservada).
+  - Centros comerciales: Espais Susanna, Outlet Social Palafolls, Mataró Parc y La Roca Village.
+    Salen siempre en el filtro, también en «Cerca de ti», porque son de comarca.
+  - lugares-verificados.json: los 138 lugares con todas las fuentes, el origen de cada coordenada,
+    la confianza (alta/media) y las notas de la verificación (qué se corrigió y por qué).
+  - Fichas con «Horario no verificado: llama antes» → no se pudo confirmar en una fuente fiable.
+  - Descartados por no poder confirmarlos (para revisar a mano si interesan): mercadillo de
+    Sant Cebrià (no consta dónde se monta tras el traslado provisional de 2024), L'Hivernacle
+    (Blanes), Kalima Beach Club (Santa Susanna, solo verano), Maui Beach Club, Kings Café,
+    Atípic (Calella), El Peix Grillat (Pineda) y dos puntos de Sant Cebrià sin ruta ni mirador fiables.
+
+DATOS
+  Todo está al principio del <script>: STAYS, TOWNS, TRANSFERS, LINKS, PHONES y POIS.
+  Cada lugar de POIS tiene: id, town, cat, name, lat, lng, address, tel, web, guardia_url, season,
+  es/en/fr {tipo, horario, consejo, extra} y sources.
+  Para pasarlo al módulo «Servicios útiles» de la guía real: cat → c, name → n, lat/lng igual,
+  address → a, horario → h, consejo → tip, tel, web, sources[0] → src.u, fecha → ver.
+  Las categorías nuevas (bar, comer, atardecer, iconico, ruta, mercadillo, centro_comercial,
+  gasolinera_24h, super_tarde, urgencias) habría que añadirlas a CATS del módulo.
